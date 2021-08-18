@@ -39,6 +39,7 @@ describe("User Repo Tests", function() {
         //@ts-ignore
         const instance = new ProWebModels.User(pool)
         const result = await instance.checkUsernameUnique("TEST")
-        console.log(result)
+        //@ts-ignore
+        expect(result.Data).to.equal(false)
     })
 })
