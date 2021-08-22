@@ -3,15 +3,10 @@ import ProWebModels from "pro-web-models"
 import sinon from "sinon"
 import mysql from "mysql2"
 import { testData } from "./test-data"
+import config from "config"
 
 describe("User Repo Tests", function() {
-    const db = {
-        "host": "localhost",
-        "user": "pro-web-user",
-        "password": "DBcpIZWXXF",
-        "database": "proweb",
-        "socketPath": "/var/run/mysqld/mysqld.sock"
-        }
+    const db = config.get("db")
     const stub = sinon.stub()
     const fake = () => {
         console.log("called")
