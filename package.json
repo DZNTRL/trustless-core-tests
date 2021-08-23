@@ -9,7 +9,7 @@
     "sinon": "^11.1.2"
   },
   "scripts": {
-    "test": "cd ../pro-web-models/ && yarn run build && cd ../pro-web-models-test && npx tsc --skipLibCheck && npx mocha ./dist/js/*-spec.js --timeout 5000"
+    "test": "cd ../pro-web-core/ && yarn run build && cd ../pro-web-models-test && npx tsc --skipLibCheck && npx mocha ./dist/js/*-spec.js --timeout 5000"
   },
   "dependencies": {
     "@types/mocha": "^9.0.0",
