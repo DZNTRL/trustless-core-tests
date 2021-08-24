@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/mocha": "^9.0.0",
     "chai": "^4.3.4",
     "mocha": "^9.0.3",
     "sinon": "^11.1.2"
@@ -12,8 +13,7 @@
     "test": "cd ../pro-web-core/ && yarn run build && cd ../pro-web-models-test && npx tsc --skipLibCheck && npx mocha ./dist/js/*-spec.js --timeout 5000"
   },
   "dependencies": {
-    "@types/mocha": "^9.0.0",
     "mysql2": "^2.3.0",
-    "pro-web-core": "../node_modules/pro-web-models"
+    "pro-web-core": "../node_modules/pro-web-core"
   }
 }

@@ -1,6 +1,5 @@
 import { expect } from "chai"
 import ProWebModels from "pro-web-core"
-import sinon from "sinon"
 import mysql from "mysql2/promise"
 import { testData } from "./test-data"
 import config from "config"
@@ -8,7 +7,6 @@ import config from "config"
 describe("User Repo Tests", function() {
     const db = config.get("db")
     const _testData = testData("test");
-    // stub(mysql, "createPool", fake)
     this.afterAll(async () => {
         const pool = await mysql.createPool(db)
         pool.query("DELETE FROM Accounts")
@@ -54,13 +52,12 @@ describe("User Repo Tests", function() {
             expect(result.Message).to.equal(ProWebModels.ResponseMessages.OK.toString())
             console.log(result.Data)
         })
-        it("User instance should get publicKey for existing user", async() => {
+        it("User instance should NOT get publicKey for non-existing user", async() => {
             const pool = await mysql.createPool(db)
             const instance = new ProWebModels.User(pool)
             const result = await instance.getPublicKey("ABCEEFDASFJ43")
-            expect(result.IsError).to.equal(false)
+            expect(result.IsError).to.equal(true)
             expect(result.Message).to.equal(ProWebModels.ResponseMessages.NotFound.toString())
-            console.log(result.Data)
         })
     })
 })

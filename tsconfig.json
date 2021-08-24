@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "module": "commonjs",
+        "moduleResolution": "node",
         "outDir":"./dist/js/",
         "noImplicitAny": false,
         "removeComments": true,
