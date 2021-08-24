@@ -22,7 +22,7 @@ baseTagSetData = {
 ;
 export const baseUser = {
   id: 0,
-  user: "test",
+  username: "test",
   publicKey: "publicKey"
 }
 
@@ -38,7 +38,7 @@ export const testData = function(namespace) {
     result.tags.push({ name: `[TEST]tag${i}`});
     result.tagSets.push(_.extend(baseTagSetData, {name: `[TEST]tagset${i}`}));    
     result.contents.push(_.extend(baseContentData, {title: `[TEST]content${i}`, slug: `${baseContentData.slug}${i}`, content: `${baseContentData.content}${i}`, tags: '' }));
-    result.user.push(_.extend(baseUser), { user: `[TEST]user${i}` })
+    result.user.push(_.extend(baseUser), { username: `[TEST]user${i}` })
   });
   
   return _.clone(result);
