@@ -11,13 +11,17 @@ describe("User Repo Tests", function() {
     const _testData = testData("test");
     var pool: mysql.Pool;
     var instance: IUser;
+    const challenge = "stone north year bright hip bacon flush tribe stairs idle submit merry"
+    const invalidUser = "ZZZZZZZZZZZZZZZDDDDDDDDDHHHH###"
+    const invalidChallenge = "bla"
     this.beforeAll(async() => {
         pool = await mysql.createPool(db)
         instance = new ProWebCore.Repo.User(pool)
     })
-    this.afterAll(async () => {
-        console.log("after all")
+    this.afterAll( (done) => {
         pool.query("DELETE FROM Accounts WHERE username LIKE '[TEST]%'")
+            .then(res => done())
+            .catch(e => done(e))
     })
     it("User class should exist on import", () => {
         expect(ProWebCore.Repo.User).to.be.an("function")
@@ -38,7 +42,7 @@ describe("User Repo Tests", function() {
             expect(result.Data).to.equal(false)
         })
         it("User instance should return true when username is unique", async() => {
-            const result = await instance.checkUsernameUnique("ABCDEFGHIJKLACD")
+            const result = await instance.checkUsernameUnique(invalidUser)
             expect(result.IsError).to.equal(false)
             expect(result.Message).to.equal(ProWebCore.Enums.ResponseMessages.OK.toString())
             expect(result.Data).to.equal(true)
@@ -58,7 +62,6 @@ describe("User Repo Tests", function() {
         })
     })
     describe("User.createChallenge tests", function() {
-        const challenge = "stone north year bright hip bacon flush tribe stairs idle submit merry"
         it("createChallenge() should return true when successfully saved", async() => {
             const result = await instance.createChallenge(_testData.user[0].username, challenge)
             expect(result.IsError).to.equal(false)
@@ -66,9 +69,43 @@ describe("User Repo Tests", function() {
             expect(result.Data).to.equal(true)
         })
         it("createChallenge() should return false when user not found", async() => {
-            const result = await instance.createChallenge("BADFDF", challenge)
+            const result = await instance.createChallenge(invalidUser, challenge)
             expect(result.IsError).to.equal(true)
             expect(result.Message).to.equal(ResponseMessages.NoRecordsUpdated.toString())
+            expect(result.Data).to.equal(false)
+        })
+    })
+    describe("User.getChallenge() tests", function() {
+        it("getChallenge() should return the challenge when a valid username is passed and the user has a challenge", async() => {
+            const result = await instance.getChallenge(_testData.user[0].username)
+            expect(result.IsError).to.equal(false)
+            expect(result.Message).to.equal(ResponseMessages.OK.toString())
+            expect(result.Data).to.equal(challenge)
+        })
+        it("getChallenge() should not return a challenge when an invalid username is passed", async() => {
+            const result = await instance.getChallenge(invalidUser)
+            expect(result.IsError).to.equal(true)
+            expect(result.Data).to.equal(null)
+        })
+    })
+    describe("User.verifyChallenge()", function() {
+        it("verifyChallenge() should return true if the username is valid and the challenge argument matches whats saved in the db", async() => {
+            const result = await instance.verifyChallenge(_testData.user[0].username, challenge)
+            expect(result.IsError).to.equal(false)
+            expect(result.Message).to.equal(ResponseMessages.OK.toString())
+            expect(result.Data).to.equal(true)
+        })
+        it("verifyChallenge() should return false with valid username but non-matching challenge", async() => {
+            const result = await instance.verifyChallenge(_testData.user[0].username, invalidChallenge)
+            expect(result.IsError).to.equal(false)
+            expect(result.Message).to.equal(ResponseMessages.OK.toString())
+            expect(result.Data).to.equal(false)
+  
+        })
+        it("verifyChallenge() should return false if the username is invalid", async() => {
+            const result = await instance.verifyChallenge(invalidUser, challenge)
+            expect(result.IsError).to.equal(false)
+            expect(result.Message).to.equal(ResponseMessages.OK.toString())
             expect(result.Data).to.equal(false)
         })
     })
