@@ -53,7 +53,6 @@ describe("User Repo Tests", function() {
             const result = await instance.getPublicKey(_testData.user[0].username)
             expect(result.IsError).to.equal(false)
             expect(result.Message).to.equal(ProWebCore.Enums.ResponseMessages.OK.toString())
-            console.log(result.Data)
         })
         it("User instance should NOT get publicKey for non-existing user", async() => {
             const result = await instance.getPublicKey("ABCEEFDASFJ43")

@@ -76,12 +76,12 @@ export const testData = function(namespace) {
     tagSets: [],
     user: []
   };
-  _.times(2, (i) => {
+  for(let i = 0; i < 2; i++)  {
     result.tags.push({ name: `[TEST]tag${i}`});
-    result.tagSets.push(_.extend(baseTagSetData, {name: `[TEST]tagset${i}`}));    
-    result.contents.push(_.extend(baseContentData, {title: `[TEST]content${i}`, slug: `${baseContentData.slug}${i}`, content: `${baseContentData.content}${i}`, tags: '' }));
-    result.user.push(_.extend(baseUser, { username: `[TEST]user${i}` }))
-  });
-  
+    result.tagSets.push(_.extend({}, baseTagSetData, {name: `[TEST]tagset${i}`}));    
+    result.contents.push(_.extend({}, baseContentData, {title: `[TEST]content${i}`, slug: `${baseContentData.slug}${i}`, content: `${baseContentData.content}${i}`, tags: '' }));
+    var user = _.extend({}, baseUser, {username: `[TEST]user${i}`})
+    result.user.push(user)
+  };
   return _.clone(result);
 };
