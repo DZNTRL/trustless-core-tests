@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import sinon from "sinon"
-import { testData } from "../sql/test-data"
+import { testData } from "../repo/test-data"
 import { injections } from "pro-web-core"
 import { IUser } from "pro-web-core/dist/js/interfaces/repo/IUser"
 import mysql from "mysql2/promise"
@@ -18,7 +18,6 @@ describe("User Service Tests", function() {
     const invalidUser = "ZZZZZZZZZZZZZZZDDDDDDDDDHHHH###"
     const invalidChallenge = "bla"
     const Response = ProWebCore.Response
-    console.log(_testData.user)
     describe("User.requestLogin() tests", function() {
         const userRepo = injections().UserRepo(pool)
         const stub = sinon.stub(userRepo, "getChallenge") 
