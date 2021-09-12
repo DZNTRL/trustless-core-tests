@@ -108,4 +108,21 @@ describe("User Repo Tests", function() {
             expect(result.Data).to.equal(false)
         })
     })
+    describe("User.get()", function() {
+        it("should get user with valid username", async() => {
+            const _user = _testData.user[0]
+            const result = await instance.get(_user.username)
+            expect(result.IsError).to.equal(false)
+            expect(result.Message).to.equal(ResponseMessages.OK.toString())
+            expect(result.Data.username).to.equal(_user.username)
+            expect(result.Data.id).to.be.greaterThan(0)
+            expect(result.Data.publicKey).to.equal(_user.publicKey)
+        })
+        it("should return message not found with invalid username", async() => {
+            const result = await instance.get("poo")
+            expect(result.IsError).to.equal(false)
+            expect(result.Message).to.equal(ResponseMessages.NotFound.toString())
+            expect(result.Data).to.equal(null)
+        })
+    })
 })

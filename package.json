@@ -13,7 +13,6 @@
     "test": "cd ../pro-web-core/ && yarn run build && cd ../pro-web-models-test && npx tsc --skipLibCheck && npx mocha ./dist/js/**/*-spec.js --timeout 5000"
   },
   "dependencies": {
-    "mysql2": "^2.3.0",
-    "pro-web-core": "../node_modules/pro-web-core"
+    "mysql2": "^2.3.0"
   }
 }
