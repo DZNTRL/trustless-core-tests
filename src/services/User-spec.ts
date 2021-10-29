@@ -5,7 +5,8 @@ import { injections } from "pro-web-core"
 import { IUser } from "pro-web-core/dist/js/interfaces/repo/IUser"
 import mysql from "mysql2/promise"
 import config from "config"
-import { ResponseMessages } from "pro-web-core/dist/js/enums/ResponseMessages"
+import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
+import { Response } from "pro-web-common/dist/js/Response"
 import ProWebCore from "pro-web-core"
 
 describe("User Service Tests", function() {
@@ -17,7 +18,6 @@ describe("User Service Tests", function() {
     const challengeB = "rock north year bright hip bacon flush tribe stairs idle submit merry"
     const invalidUser = "ZZZZZZZZZZZZZZZDDDDDDDDDHHHH###"
     const invalidChallenge = "bla"
-    const Response = ProWebCore.Response
     describe("User.requestLogin() tests", function() {
         const userRepo = injections().UserRepo(pool)
         const stub = sinon.stub(userRepo, "getChallenge") 
