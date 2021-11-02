@@ -1,12 +1,12 @@
 import { expect } from "chai"
 import ProWebCore from "pro-web-core"
-import { IUser } from "pro-web-core/dist/js/interfaces/repo/IUser"
+import { IUser } from "pro-web-common/dist/js/interfaces/repo/IUser"
 import mysql from "mysql2/promise"
 import { testData } from "./test-data"
 import config from "config"
 import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
 
-describe("User Repo Tests", function() {
+xdescribe("User Repo Tests", function() {
     const db = config.get("db")
     const _testData = testData("test");
     var pool: mysql.Pool;

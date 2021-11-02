@@ -725,10 +725,18 @@ pro-web-common@1.0.4:
     mysql2 "^2.3.2"
     yup "^0.32.11"
 
-pro-web-core@1.0.2:
-  version "1.0.2"
-  resolved "http://localhost:4873/pro-web-core/-/pro-web-core-1.0.2.tgz#859c07c3d8cc4f13230cd2c754d83aef55920980"
-  integrity sha512-sfmk628V5mGDqK58023m4HYt6E5uVdynylLPKhYu+uON0s1KoBhRI/L80OTnfrfpKYijuOz9lwl6awAqxlLpqA==
+pro-web-common@1.0.5:
+  version "1.0.5"
+  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.5.tgz#d8e9c2b5eb015f0bfc807d117f51585cb4f7d70e"
+  integrity sha512-vJsxgdgclip0QynzqJeZ4NXBkru2hN3rGY+dvyaQ8EfegfjSU1eolmM1TeAvdD2OnTi1+Ctl9cOsJMNa22DVyw==
+  dependencies:
+    mysql2 "^2.3.2"
+    yup "^0.32.11"
+
+pro-web-core@1.0.6:
+  version "1.0.6"
+  resolved "http://localhost:4873/pro-web-core/-/pro-web-core-1.0.6.tgz#14ba27543c9a7c9b93e6f939e5032d6e09d42c66"
+  integrity sha512-MmnrXmy/h0+aNCsV/ZeH5GzofTbi+9fykuJ2AxvZ9yGHDRgqb3PMCBLsPK/APflSOFuCf75bfUsz2I8iT+lDjg==
   dependencies:
     async "^3.2.1"
     bip39 "^3.0.4"
