@@ -47,7 +47,7 @@ FqYipbUcrFipa7bQPRpuZYVlC+RErLrKHACW8nJNuPqYlLYKW5AAKY6sb577WOnI
 =wXh8
 -----END PGP PUBLIC KEY BLOCK-----
 `
-xdescribe("ProWebCore Utils Test Suite", function(){
+describe("ProWebCore Utils Test Suite", function(){
     describe("createChallenge tests", function() {
         const createChallenge = Core.Utils.createChallenge
         it("should create a challenge with 12 'words'", async () => {

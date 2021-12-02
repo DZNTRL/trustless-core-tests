@@ -6,7 +6,7 @@ import { testData } from "./test-data"
 import config from "config"
 import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
 
-xdescribe("User Repo Tests", function() {
+describe("User Repo Tests", function() {
     const db = config.get("db")
     const _testData = testData("test");
     var pool: mysql.Pool;
@@ -16,7 +16,7 @@ xdescribe("User Repo Tests", function() {
     const invalidChallenge = "bla"
     this.beforeAll(async() => {
         pool = await mysql.createPool(db)
-        instance = new ProWebCore.Repo.User(pool)
+        instance = new ProWebCore.Repo.User({pool})
     })
     this.afterAll( (done) => {
         pool.query("DELETE FROM Accounts WHERE username LIKE '[TEST]%'")

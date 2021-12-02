@@ -61,7 +61,7 @@ describe("User Service Tests", function() {
     const challengeB = "rock north year bright hip bacon flush tribe stairs idle submit merry"
     const invalidUser = "ZZZZZZZZZZZZZZZDDDDDDDDDHHHH###"
     const invalidChallenge = "bla"
-    const userRepo = injections().UserRepo(pool)
+    const userRepo = injections({pool}).UserRepo
     const stub = sinon.stub(userRepo, "getChallenge") 
     stub
         .withArgs(_testData.user[0].username)
@@ -89,20 +89,20 @@ describe("User Service Tests", function() {
         .withArgs(_testData.user[0].username)
         .returns(new Response(new User(_testData.user[0].username, publicKey, 1, false), ResponseMessages.OK.toString(), false))
     describe("User.requestLogin() tests", function() {
-        const userService = new Core.Service.User(pool, userRepo, console.log)
+        const userService = new Core.Service.User(userRepo)
         it("should return challenge with valid username", async() => {
             const resp = await userService.requestLogin(_testData.user[0].username)            
             expect(resp.IsError).to.equal(false)
             expect(resp.Message).to.equal(ResponseMessages.OK.toString())
             expect(resp.Data).to.satisfy(msg => msg.startsWith(("-----BEGIN PGP MESSAGE-----")))
         })
-        xit("should not return challenge with invalid username", async() => {
+        it("should not return challenge with invalid username", async() => {
             const resp = await userRepo.getChallenge(invalidUser)
             expect(resp.IsError).to.equal(false)
             expect(resp.Message).to.equal(ResponseMessages.NotFound.toString())
             expect(resp.Data).to.equal(null)
         })
-        xit("should create & return challenge with valid username but without existing challenge", async() => {
+        it("should create & return challenge with valid username but without existing challenge", async() => {
             const resp = await userRepo.getChallenge(_testData.user[1].username)
             expect(resp.IsError).to.equal(false)
             expect(resp.Message).to.equal(ResponseMessages.OK.toString())

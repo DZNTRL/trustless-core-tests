@@ -717,33 +717,25 @@ picomatch@^2.0.4, picomatch@^2.2.1:
   resolved "http://localhost:4873/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
   integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
 
-pro-web-common@1.0.4:
-  version "1.0.4"
-  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.4.tgz#2e58988b20c9cd5317756b13d6107e53eb71a1f8"
-  integrity sha512-8lwqdh9aazUNn6WZf+UlDK394GwK7tL4AIOeva6d6Z1QlOxY8KSVw8WRpCHHGUnauDp3//1rSyNtyIDHTEeagA==
-  dependencies:
-    mysql2 "^2.3.2"
-    yup "^0.32.11"
-
-pro-web-common@1.0.5:
-  version "1.0.5"
-  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.5.tgz#d8e9c2b5eb015f0bfc807d117f51585cb4f7d70e"
-  integrity sha512-vJsxgdgclip0QynzqJeZ4NXBkru2hN3rGY+dvyaQ8EfegfjSU1eolmM1TeAvdD2OnTi1+Ctl9cOsJMNa22DVyw==
-  dependencies:
-    mysql2 "^2.3.2"
-    yup "^0.32.11"
-
-pro-web-core@1.0.6:
+pro-web-common@^1.0.6:
   version "1.0.6"
-  resolved "http://localhost:4873/pro-web-core/-/pro-web-core-1.0.6.tgz#14ba27543c9a7c9b93e6f939e5032d6e09d42c66"
-  integrity sha512-MmnrXmy/h0+aNCsV/ZeH5GzofTbi+9fykuJ2AxvZ9yGHDRgqb3PMCBLsPK/APflSOFuCf75bfUsz2I8iT+lDjg==
+  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.6.tgz#96b1420b15080cf4e7f269762f3a7533b6bffc19"
+  integrity sha512-n+5eQNhdITCCtUgg7N7/Ct3f9TG7mA3iwdONHvmqtaJDODsDy4oCcTdFdX48uJ2j3/konltiHF3df6UTxCg0Bw==
+  dependencies:
+    mysql2 "^2.3.2"
+    yup "^0.32.11"
+
+pro-web-core@^1.0.12:
+  version "1.0.12"
+  resolved "http://localhost:4873/pro-web-core/-/pro-web-core-1.0.12.tgz#07efb5aee6c1643df0428635a54a1cd8d102af1c"
+  integrity sha512-ain6wmBBZxu5Dbgmr/j4+IoSYwzQ0tuEDoe48RD57mPBFJ1Tl9DczYIS1QqAZKHRfvSQgW3kEuDaSJcxncvOkg==
   dependencies:
     async "^3.2.1"
     bip39 "^3.0.4"
     config "^3.3.6"
     mysql2 "^2.3.0"
     openpgp "^5.0.0-5"
-    pro-web-common "1.0.4"
+    pro-web-common "^1.0.6"
     yup "^0.32.9"
 
 property-expr@^2.0.4:
