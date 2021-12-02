@@ -1,29 +1,7 @@
-const _ = require('lodash'),
-baseTagData = {
-  name: 'tag',
-  type: 'test'
-},
-baseContentData = {
-  id: 0,
-  title: 'title',
-  slug: 'TEST-slug',
-  published: false,
-  markupType: 'html',
-  created: null,
-  modified: null,
-  content: 'content'
-},
-baseTagSetData = {
-  id: 0,
-  name: 'tagsetname',
-  deleted: false,
-  tags: 'tagset,test,any'  
-}
-;
 export const baseUser = {
-  id: 0,
-  username: "test",
-  publicKey: `
+    id: 0,
+    username: "test",
+    publicKey: `
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mQGNBGEmS1kBDAC6WAaf0dH9BnprrIxx7wu73wwI2VpBIJjBB7oCB3Dwsc3wtjsX
@@ -66,23 +44,5 @@ FqYipbUcrFipa7bQPRpuZYVlC+RErLrKHACW8nJNuPqYlLYKW5AAKY6sb577WOnI
 =wXh8
 -----END PGP PUBLIC KEY BLOCK-----
 `
-}
-
-export const testData = function(namespace) {
-  var result;
-  result = {
-    tags: [],
-    contents: [],
-    tagSets: [],
-    user: []
-  };
-  for(let i = 0; i < 2; i++)  {
-    result.tags.push({ name: `[TEST]tag${i}`});
-    result.tagSets.push(_.extend({}, baseTagSetData, {name: `[TEST]tagset${i}`}));    
-    result.contents.push(_.extend({}, baseContentData, {title: `[TEST]content${i}`, slug: `${baseContentData.slug}${i}`, content: `${baseContentData.content}${i}`, tags: '' }));
-    var user = _.extend({}, baseUser, {username: `[TEST]user${i}`})
-    console.log("do the publicKey equal?", user.publicKey === baseUser.publicKey)
-    result.user.push(user)
-  };
-  return _.clone(result);
-};
+  }
+  

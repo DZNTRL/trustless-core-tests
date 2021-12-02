@@ -1,10 +1,10 @@
 import { expect } from "chai"
 import ProWebCore from "pro-web-core"
-import { IUser } from "pro-web-core/dist/js/interfaces/repo/IUser"
+import { IUser } from "pro-web-common/dist/js/interfaces/repo/IUser"
 import mysql from "mysql2/promise"
 import { testData } from "./test-data"
 import config from "config"
-import { ResponseMessages } from "pro-web-core/dist/js/enums/ResponseMessages"
+import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
 
 describe("User Repo Tests", function() {
     const db = config.get("db")
@@ -16,7 +16,7 @@ describe("User Repo Tests", function() {
     const invalidChallenge = "bla"
     this.beforeAll(async() => {
         pool = await mysql.createPool(db)
-        instance = new ProWebCore.Repo.User(pool)
+        instance = new ProWebCore.Repo.User({pool})
     })
     this.afterAll( (done) => {
         pool.query("DELETE FROM Accounts WHERE username LIKE '[TEST]%'")
@@ -44,7 +44,7 @@ describe("User Repo Tests", function() {
         it("User instance should return true when username is unique", async() => {
             const result = await instance.checkUsernameUnique(invalidUser)
             expect(result.IsError).to.equal(false)
-            expect(result.Message).to.equal(ProWebCore.Enums.ResponseMessages.OK.toString())
+            expect(result.Message).to.equal(ResponseMessages.OK.toString())
             expect(result.Data).to.equal(true)
         })
     })
@@ -52,12 +52,12 @@ describe("User Repo Tests", function() {
         it("User instance should get publicKey for existing user", async() => {
             const result = await instance.getPublicKey(_testData.user[0].username)
             expect(result.IsError).to.equal(false)
-            expect(result.Message).to.equal(ProWebCore.Enums.ResponseMessages.OK.toString())
+            expect(result.Message).to.equal(ResponseMessages.OK.toString())
         })
         it("User instance should NOT get publicKey for non-existing user", async() => {
             const result = await instance.getPublicKey("ABCEEFDASFJ43")
             expect(result.IsError).to.equal(true)
-            expect(result.Message).to.equal(ProWebCore.Enums.ResponseMessages.NotFound.toString())
+            expect(result.Message).to.equal(ResponseMessages.NotFound.toString())
         })
     })
     describe("User.createChallenge tests", function() {
