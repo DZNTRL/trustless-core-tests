@@ -5,6 +5,7 @@ import mysql from "mysql2/promise"
 import { testData } from "./test-data"
 import config from "config"
 import { ResponseMessages } from "pro-web-common/dist/js/enums/ResponseMessages"
+import { encryptChallenge } from "pro-web-core/dist/js/utils/encryptChallenge"
 
 describe("User Repo Tests", function() {
     const db = config.get("db")
@@ -14,6 +15,7 @@ describe("User Repo Tests", function() {
     const challenge = "stone north year bright hip bacon flush tribe stairs idle submit merry"
     const invalidUser = "ZZZZZZZZZZZZZZZDDDDDDDDDHHHH###"
     const invalidChallenge = "bla"
+    var encryptedChallenge: string = ""
     this.beforeAll(async() => {
         pool = await mysql.createPool(db)
         instance = new ProWebCore.Repo.User({pool})
@@ -62,7 +64,10 @@ describe("User Repo Tests", function() {
     })
     describe("User.createChallenge tests", function() {
         it("createChallenge() should return true when successfully saved", async() => {
-            const result = await instance.createChallenge(_testData.user[0].username, challenge)
+            const user = await instance.get(_testData.user[0].username)
+            console.log("user from get for publik key test", user.Data)
+            encryptedChallenge = await encryptChallenge(challenge, user.Data.publicKey)
+            const result = await instance.createChallenge(_testData.user[0].username, encryptedChallenge)
             expect(result.IsError).to.equal(false)
             expect(result.Message).to.equal(ResponseMessages.OK.toString())
             expect(result.Data).to.equal(true)
@@ -79,7 +84,7 @@ describe("User Repo Tests", function() {
             const result = await instance.getChallenge(_testData.user[0].username)
             expect(result.IsError).to.equal(false)
             expect(result.Message).to.equal(ResponseMessages.OK.toString())
-            expect(result.Data).to.equal(challenge)
+            expect(result.Data).to.equal(encryptedChallenge)
         })
         it("getChallenge() should not return a challenge when an invalid username is passed", async() => {
             const result = await instance.getChallenge(invalidUser)
@@ -89,7 +94,7 @@ describe("User Repo Tests", function() {
     })
     describe("User.verifyChallenge()", function() {
         it("verifyChallenge() should return true if the username is valid and the challenge argument matches whats saved in the db", async() => {
-            const result = await instance.verifyChallenge(_testData.user[0].username, challenge)
+            const result = await instance.verifyChallenge(_testData.user[0].username, encryptedChallenge)
             expect(result.IsError).to.equal(false)
             expect(result.Message).to.equal(ResponseMessages.OK.toString())
             expect(result.Data).to.equal(true)
@@ -117,12 +122,40 @@ describe("User Repo Tests", function() {
             expect(result.Data.username).to.equal(_user.username)
             expect(result.Data.id).to.be.greaterThan(0)
             expect(result.Data.publicKey).to.equal(_user.publicKey)
+            expect(result.Data.lastLogin).to.not.equal(null)
         })
         it("should return message not found with invalid username", async() => {
             const result = await instance.get("poo")
             expect(result.IsError).to.equal(false)
             expect(result.Message).to.equal(ResponseMessages.NotFound.toString())
             expect(result.Data).to.equal(null)
+        })
+    })
+    describe("User.login", function() {
+        it("should login a valid user", async() => {
+            const _user = _testData.user[0]
+            const result = await instance.setLogin(_user.username)
+            console.log("this is my result", result)
+            expect(result.IsError).to.equal(false)
+            expect(result.Message).to.equal(ResponseMessages.OK.toString())
+            expect(result.Data).to.equal(true)
+        })
+
+    })
+    describe("User.logout", function() {
+        it("should logout valid/logged in user", async() => {
+            const _user = _testData.user[0]
+            const result = await instance.setLogout(_user.username)
+            expect(result.IsError).to.equal(false)
+            expect(result.Message).to.equal(ResponseMessages.OK.toString())
+            expect(result.Data).to.equal(true)
+        })
+        it("should NOT logout a not-logged-in user", async () => {
+            const result = await instance.setLogout("poo")
+            expect(result.IsError).to.equal(false)
+            expect(result.Message).to.equal(ResponseMessages.NotFound.toString())
+            expect(result.Data).to.equal(false)
+
         })
     })
 })

@@ -717,25 +717,34 @@ picomatch@^2.0.4, picomatch@^2.2.1:
   resolved "http://localhost:4873/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
   integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
 
-pro-web-common@^1.0.6:
-  version "1.0.6"
-  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.6.tgz#96b1420b15080cf4e7f269762f3a7533b6bffc19"
-  integrity sha512-n+5eQNhdITCCtUgg7N7/Ct3f9TG7mA3iwdONHvmqtaJDODsDy4oCcTdFdX48uJ2j3/konltiHF3df6UTxCg0Bw==
+pro-web-common@^1.0.18:
+  version "1.0.18"
+  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.18.tgz#22eaa121504a111f311f7242d3ea7050e85eef1b"
+  integrity sha512-Fpekei10Hhz7b4IW5xhV1jXPxNKqoIJAdNuBn18Lz0ecg1zYXJ8nlnwbNH2J9OZajwCqJbcIqy/iCJVl9Mts0Q==
   dependencies:
     mysql2 "^2.3.2"
     yup "^0.32.11"
 
-pro-web-core@^1.0.12:
-  version "1.0.12"
-  resolved "http://localhost:4873/pro-web-core/-/pro-web-core-1.0.12.tgz#07efb5aee6c1643df0428635a54a1cd8d102af1c"
-  integrity sha512-ain6wmBBZxu5Dbgmr/j4+IoSYwzQ0tuEDoe48RD57mPBFJ1Tl9DczYIS1QqAZKHRfvSQgW3kEuDaSJcxncvOkg==
+pro-web-common@^1.0.9:
+  version "1.0.9"
+  resolved "http://localhost:4873/pro-web-common/-/pro-web-common-1.0.9.tgz#289eb2e98447ea5b3f4081f5c2a109d296cd4a71"
+  integrity sha512-FBTqzgVFYGCyDlz2wMazYcRSD1in3qRza4UwVw3ak0Kkz+LwUdpzRt9aG4CRZqyeDxmZ/3zYT4asNVT14g0PUQ==
+  dependencies:
+    mysql2 "^2.3.2"
+    yup "^0.32.11"
+
+pro-web-core@^1.0.28:
+  version "1.0.28"
+  resolved "http://localhost:4873/pro-web-core/-/pro-web-core-1.0.28.tgz#953bd3fd65cc4a1c174d232be32b3a34c7dfd8ef"
+  integrity sha512-dx5pZUo3Ho3A8HDmPbBWgGRTudEsRzcAZuB14yJI7ocuf1dR3USTUq3OBcjycVEoLpryZ+kWPbZE52FoGUgnnA==
   dependencies:
     async "^3.2.1"
     bip39 "^3.0.4"
     config "^3.3.6"
     mysql2 "^2.3.0"
     openpgp "^5.0.0-5"
-    pro-web-common "^1.0.6"
+    pro-web-common "^1.0.9"
+    vybe-common "^1.0.60"
     yup "^0.32.9"
 
 property-expr@^2.0.4:
@@ -899,6 +908,14 @@ util-deprecate@^1.0.1:
   version "1.0.2"
   resolved "http://localhost:4873/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+
+vybe-common@^1.0.60:
+  version "1.0.105"
+  resolved "http://localhost:4873/vybe-common/-/vybe-common-1.0.105.tgz#15683c1765b95d7796a95a2c827041fdd1c1a0f7"
+  integrity sha512-R+acWlsfvr6AYWMEABgLdbOvQmnpkTvr+hNeIMRu82GKPv+uToEynSINg/5lEaEzaWgaL3FXQhFkLFC1erPt+g==
+  dependencies:
+    mysql2 "^2.3.2"
+    yup "^0.32.11"
 
 which@2.0.2:
   version "2.0.2"

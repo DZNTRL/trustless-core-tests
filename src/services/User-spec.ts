@@ -87,7 +87,7 @@ describe("User Service Tests", function() {
     const stubUserGet = sinon.stub(userRepo, "get")
     stubUserGet
         .withArgs(_testData.user[0].username)
-        .returns(new Response(new User(_testData.user[0].username, publicKey, 1, false), ResponseMessages.OK.toString(), false))
+        .returns(new Response(new User(_testData.user[0].username, publicKey, 1, false, null, null), ResponseMessages.OK.toString(), false))
     describe("User.requestLogin() tests", function() {
         const userService = new Core.Service.User(userRepo)
         it("should return challenge with valid username", async() => {
