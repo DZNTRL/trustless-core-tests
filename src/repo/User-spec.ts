@@ -122,7 +122,7 @@ describe("User Repo Tests", function() {
             expect(result.Data.username).to.equal(_user.username)
             expect(result.Data.id).to.be.greaterThan(0)
             expect(result.Data.publicKey).to.equal(_user.publicKey)
-            expect(result.Data.lastLogin).to.not.equal(null)
+            expect(result.Data.lastLogin).to.equal(null)
         })
         it("should return message not found with invalid username", async() => {
             const result = await instance.get("poo")

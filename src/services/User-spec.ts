@@ -62,6 +62,13 @@ describe("User Service Tests", function() {
     const invalidUser = "ZZZZZZZZZZZZZZZDDDDDDDDDHHHH###"
     const invalidChallenge = "bla"
     const userRepo = injections({pool}).UserRepo
+    const stubCreate = sinon.stub(userRepo, "createUser")
+    stubCreate
+        .withArgs(_testData.user[0].username, publicKey)
+        .returns(new Response<number>(1))
+        .withArgs(_testData.user[0].username, "test")
+        .returns(new Response<number>(0))
+
     const stub = sinon.stub(userRepo, "getChallenge") 
     stub
         .withArgs(_testData.user[0].username)
@@ -108,5 +115,21 @@ describe("User Service Tests", function() {
             expect(resp.Message).to.equal(ResponseMessages.OK.toString())
             expect(resp.Data).to.equal(challengeB)
         })
+    })
+    describe("User.create() tests", function() {
+        const userService = new Core.Service.User(userRepo)
+        it("should create a new user", async() => {
+            const resp = await userService.createUser(_testData.user[0].username, publicKey)
+            expect(resp.IsError).to.equal(false)
+            expect(resp.Message).to.equal(ResponseMessages.OK.toString())
+            expect(resp.Data).to.equal(1)
+        })
+        it("should not create user with invalid key", async() => {
+            const resp = await userService.createUser(_testData.user[0].username, "test")
+            expect(resp.IsError).to.equal(true)
+            expect(resp.Message).to.equal(ResponseMessages.InvalidPublicKey.toString())
+            expect(resp.Data).to.equal(0)
+        })
+
     })
 })
